@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
     border: 0;
     text-decoration: none;
     box-sizing: border-box;
+    color: #0C0C0C;
     &:visited {
       text-decoration: none;
       color: black;
