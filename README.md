@@ -1,50 +1,25 @@
-# React + TypeScript + Vite
+블레이버스 빅데이터 분석 자동화 서비스 개발 해커톤 - 빅파이팀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Branch Naming Convention
 
-Currently, two official plugins are available:
+| **Prefix** | **Description**          |
+| ---------- | ------------------------ |
+| `main`     | 서비스 브랜치            |
+| `develop`  | 배포 전 작업 기준 브랜치 |
+| `feature`  | 기능 단위 구현 브랜치    |
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Commit Convention
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+| **Prefix** | **Description**                        |
+| ---------- | -------------------------------------- |
+| `feat`     | 기능 구현, 추가                        |
+| `fix`      | 버그 수정, 예외 케이스 대응, 기능 개선 |
+| `style`    | UI 디자인 수정                         |
+| `api`      | api 연결                               |
+| `setting`  | 패키지 설치, 개발 설정                 |
+| `refactor` | 코드 리팩터링                          |
+| `rename`   | 파일명(폴더명)을 수정                  |
+| `remove`   | 파일(폴더) 삭제                        |
+| `test`     | 테스트 코드 추가                       |
+| `docs`     | README.md 작성 및 변경                 |
+| `hotfix`   | 치명적인 버그를 급하게 수정하는 경우   |
