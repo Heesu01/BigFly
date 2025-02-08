@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const Header: React.FC = () => {
+const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -53,12 +53,15 @@ interface MenuItemProps {
 
 const MenuItem = styled(Link)<MenuItemProps>`
   color: ${(props) =>
-    props.$active ? props.theme.colors.black : props.theme.colors.gray};
+    props.$active ? props.theme.colors.pointBlue : props.theme.colors.gray};
+  font-weight: ${(props) => (props.$active ? "bold" : "normal")};
+  text-decoration: none;
   cursor: pointer;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: color 0.3s ease-in-out;
 `;
 
 const ActiveLine = styled.div<MenuItemProps>`
@@ -68,6 +71,7 @@ const ActiveLine = styled.div<MenuItemProps>`
   position: absolute;
   bottom: -23px;
   display: ${(props) => (props.$active ? "block" : "none")};
+  transition: opacity 0.3s ease-in-out;
 `;
 
 export default Header;
