@@ -23,9 +23,13 @@ export const Theme: DefaultTheme = {
   },
   colors: {
     white: "#fff",
-    gray: "#9A9A9A",
-    gray2: "#E9E9E9",
+    gray: "#E0E0E0",
+    gray2: "#F0FAFF",
     black: "#000",
-    red: "#FF4040",
+    pointBlue: "#89D5FF",
+    blue: "#B5E6FF",
+    skyblue: "#D2F0FF",
+    lightBlue: "#F0FAFF",
+    whiteBlue: "#F9FDFF",
   },
 };
