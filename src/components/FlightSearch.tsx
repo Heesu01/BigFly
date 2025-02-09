@@ -59,9 +59,9 @@ const FlightSearch: React.FC<FlightSearchProps> = ({ onSearch }) => {
 export default FlightSearch;
 
 const Container = styled.div`
-  padding: 10px 30px;
+  padding: 9px 30px;
   background-color: rgba(255, 255, 255, 0.6);
-  border-radius: 8px;
+  border-radius: 10px;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
   margin: auto;
 `;
@@ -79,8 +79,8 @@ const Label = styled.p`
 
 const Input = styled.input`
   border: 1px solid ${(props) => props.theme.colors.gray};
-  border-radius: 8px;
-  padding: 8px;
+  border-radius: 5px;
+  padding: 5px 8px;
   font-size: 14px;
   flex: 1;
   margin-right: 30px;
@@ -90,8 +90,8 @@ const StyledDatePicker = styled(DatePicker)<
   React.ComponentProps<typeof DatePicker>
 >`
   border: 1px solid ${(props) => props.theme.colors.gray};
-  border-radius: 8px;
-  padding: 8px;
+  border-radius: 5px;
+  padding: 5px 8px;
   font-size: 14px;
   flex: 1;
   margin-right: 30px;
@@ -99,7 +99,7 @@ const StyledDatePicker = styled(DatePicker)<
 
 const Button = styled.button`
   background-color: ${(props) => props.theme.colors.blue};
-  padding: 8px 16px;
+  padding: 5px 16px;
   border-radius: 8px;
   font-size: 14px;
   cursor: pointer;
