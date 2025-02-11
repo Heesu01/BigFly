@@ -1,6 +1,4 @@
 import React from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 import FlightSearch from "../components/FlightSearch";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
@@ -8,18 +6,24 @@ import { useNavigate } from "react-router-dom";
 const MainPage = () => {
   const navigate = useNavigate();
 
+  const handleSearch = (data: {
+    date: Date | null;
+    flightNumber: string;
+    departureTime: string;
+  }) => {
+    console.log("검색 데이터:", data);
+    //api요청
+  };
+
   return (
     <Container>
-      <Header />
-
       <Body>
         <h1>
           해외여행의 모든 것
           <br />
           빅파이와 함께
         </h1>
-        <FlightSearch />
-
+        <FlightSearch onSearch={handleSearch} />
         <NowBox>
           <div>
             <p>지금 인천공항은?</p>
@@ -36,7 +40,7 @@ const MainPage = () => {
           </Item>
           <Item onClick={() => navigate("/departure")}>
             <Title>추천 도착시간</Title>
-            <p>내가 몇시에 도착해야 할지알고 싶다면? </p>
+            <p>내가 몇시에 도착해야 할지 알고 싶다면? </p>
             <Img>🛫</Img>
           </Item>
           <Item onClick={() => navigate("/news")}>
@@ -46,7 +50,6 @@ const MainPage = () => {
           </Item>
         </MenuBox>
       </Body>
-      {/* <Footer /> */}
     </Container>
   );
 };
