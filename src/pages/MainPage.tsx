@@ -2,6 +2,7 @@ import React from "react";
 import FlightSearch from "../components/FlightSearch";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import NowContent from "../components/NowContent";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -18,19 +19,20 @@ const MainPage = () => {
   return (
     <Container>
       <Body>
-        <h1>
-          해외여행의 모든 것
-          <br />
-          빅파이와 함께
-        </h1>
+        <Info>
+          <h1>BigFly</h1>
+          <p>
+            공항이 붐비는 시간? 이제 걱정 마세요!
+            <br />
+            혼잡도를 분석하여 출발 시간을 추천해드립니다.
+          </p>
+        </Info>
         <FlightSearch onSearch={handleSearch} />
         <NowBox>
-          <div>
-            <p>지금 인천공항은?</p>
-            <p onClick={() => navigate("/realtime")}>더보기 &gt;</p>
-          </div>
-          <NowContent></NowContent>
+          <p>지금 인천공항은?</p>
+          <p onClick={() => navigate("/realtime")}>더보기 &gt;</p>
         </NowBox>
+        <NowContent />
 
         <MenuBox>
           <Item onClick={() => navigate("/realtime")}>
@@ -63,34 +65,33 @@ const Container = styled.div`
 const Body = styled.div`
   width: 80%;
   margin: auto;
+`;
+
+const Info = styled.div`
+  margin-bottom: 30px;
 
   h1 {
     text-align: center;
-    font-size: 2rem;
+    ${(props) => props.theme.fonts.logo};
+    font-size: 3em;
     margin-bottom: 30px;
     margin-top: 60px;
+  }
+  p {
+    text-align: center;
     line-height: 1.5;
   }
 `;
 
 const NowBox = styled.div`
   margin-top: 50px;
-  div {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-    padding: 0 10px;
-    p {
-      cursor: pointer;
-    }
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 0 10px;
+  p {
+    cursor: pointer;
   }
-`;
-
-const NowContent = styled.div`
-  height: 350px;
-  background-color: rgba(255, 255, 255, 0.7);
-  border-radius: 20px;
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
 `;
 
 const MenuBox = styled.div`
