@@ -8,7 +8,7 @@ const Header = () => {
 
   return (
     <Container>
-      <Logo onClick={() => navigate("/")}>로고</Logo>
+      <Logo onClick={() => navigate("/")}>BigFly</Logo>
       <Menu>
         <MenuItem to="/realtime" $active={location.pathname === "/realtime"}>
           실시간 공항
@@ -39,6 +39,7 @@ const Container = styled.div`
 
 const Logo = styled.div`
   cursor: pointer;
+  ${(props) => props.theme.fonts.logo};
 `;
 
 const Menu = styled.div`

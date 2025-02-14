@@ -3,8 +3,9 @@ import { DefaultTheme, css } from "styled-components";
 export const Theme: DefaultTheme = {
   fonts: {
     logo: css`
-      font-family: "";
-      font-size: 30px;
+      font-family: "ghanachoco";
+      font-size: 25px;
+      color: #00517d;
     `,
     default: css`
       font-family: "";
