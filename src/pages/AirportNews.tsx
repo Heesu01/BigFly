@@ -10,59 +10,91 @@ interface NewsArticle {
 
 const AirportNews = () => {
   const [news, setNews] = useState<NewsArticle[]>([]);
+  const [page, setPage] = useState(1);
+  const [sortOption, setSortOption] = useState("sim");
+  const newsPerPage = 5;
 
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        setNews([
+        const start = (page - 1) * newsPerPage + 1;
+        const response = await fetch(
+          `/v1/search/news.json?query=인천공항&display=${newsPerPage}&start=${start}&sort=${sortOption}`, // ✅ 정렬 방식 반영
           {
-            title: "인천공항 ‘비상’, 폭설 때보다 혼잡...",
-            originallink: "#",
-            description:
-              "설 명절 연휴를 하루 앞둔 24일, 인천공항은 예년보다 더욱 혼잡한 모습을 보였다.",
-            pubDate: "2024-02-13",
-          },
-          {
-            title: "인천공항, 4시간 전에는 와야...",
-            originallink: "#",
-            description:
-              "출국장 이용객이 오전 7~8시에 6038명으로 예상되며, 혼잡이 심할 것으로 보인다.",
-            pubDate: "2024-02-13",
-          },
-        ]);
+            headers: {
+              "Content-Type": "application/json",
+              "X-Naver-Client-Id": import.meta.env
+                .VITE_NAVER_CLIENT_ID as string,
+              "X-Naver-Client-Secret": import.meta.env
+                .VITE_NAVER_CLIENT_SECRET as string,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("네이버 뉴스 API 요청 실패");
+        }
+
+        const data = await response.json();
+        setNews(data.items);
       } catch (error) {
-        console.error("뉴스 데이터를 불러오는 중 오류 발생", error);
+        console.error("뉴스 데이터를 불러오는 중 오류 발생:", error);
       }
     };
 
     fetchNews();
-  }, []);
+  }, [page, sortOption]);
 
   return (
     <Container>
       <NewsWrapper>
-        <Title>공항 뉴스</Title>
+        <Header>
+          <Title>공항 뉴스</Title>
+
+          <SortSelect
+            value={sortOption}
+            onChange={(e) => setSortOption(e.target.value)}
+          >
+            <option value="date">최신순</option>
+            <option value="sim">정확도순</option>
+          </SortSelect>
+        </Header>
+
         <hr />
-        {news.map((article, index) => (
-          <NewsItem key={index}>
-            <NewsContent>
-              <NewsTitle dangerouslySetInnerHTML={{ __html: article.title }} />
-              <NewsDescription
-                dangerouslySetInnerHTML={{ __html: article.description }}
-              />
-              <NewsMeta>
-                <span>{article.pubDate}</span>
-                <NewsLink
-                  href={article.originallink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  기사 원문 보기 &gt;
-                </NewsLink>
-              </NewsMeta>
-            </NewsContent>
-          </NewsItem>
-        ))}
+        {news.length > 0 ? (
+          news.map((article, index) => (
+            <NewsItem key={index}>
+              <NewsContent>
+                <NewsTitle
+                  dangerouslySetInnerHTML={{ __html: article.title }}
+                />
+                <NewsDescription
+                  dangerouslySetInnerHTML={{ __html: article.description }}
+                />
+                <NewsMeta>
+                  <span>{new Date(article.pubDate).toLocaleDateString()}</span>
+                  <NewsLink
+                    href={article.originallink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    기사 원문 보기 &gt;
+                  </NewsLink>
+                </NewsMeta>
+              </NewsContent>
+            </NewsItem>
+          ))
+        ) : (
+          <p>뉴스를 불러오는 중...</p>
+        )}
+
+        <Pagination>
+          <PageButton disabled={page === 1} onClick={() => setPage(page - 1)}>
+            &lt;
+          </PageButton>
+          <PageNumber>{page}</PageNumber>
+          <PageButton onClick={() => setPage(page + 1)}>&gt;</PageButton>
+        </Pagination>
       </NewsWrapper>
       <Sidebar>
         <MoreLink>
@@ -96,16 +128,29 @@ const NewsWrapper = styled.div`
   border-radius: 8px;
 `;
 
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+`;
+
 const Title = styled.h2`
   font-size: 24px;
   font-weight: 500;
-  margin-bottom: 20px;
+`;
+
+const SortSelect = styled.select`
+  padding: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 `;
 
 const NewsItem = styled.div`
   display: flex;
   align-items: flex-start;
-  padding: 15px 0;
+  padding: 15px 10px;
   border-bottom: 1px solid #ddd;
 `;
 
@@ -136,9 +181,35 @@ const NewsMeta = styled.div`
 
 const NewsLink = styled.a`
   font-size: 13px;
-  color: blue;
+  color: ${(props) => props.theme.colors.navy};
   text-decoration: underline;
   cursor: pointer;
+`;
+
+const Pagination = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+`;
+
+const PageButton = styled.button`
+  border: none;
+  background-color: #fff;
+  padding: 4px 10px;
+  margin: 0 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  &:disabled {
+    /* background-color: #ccc; */
+    cursor: not-allowed;
+    color: #fff;
+  }
+`;
+
+const PageNumber = styled.span`
+  font-size: 16px;
+  font-weight: bold;
 `;
 
 const Sidebar = styled.div`
@@ -166,7 +237,7 @@ const MoreLink = styled.div`
 const ChartPlaceholder = styled.div`
   width: 100%;
   height: 200px;
-  background-color: ${(props) => props.theme.colors.lightBlue || "#e0e0e0"};
+  background-color: ${(props) => props.theme.colors.lightBlue};
   border-radius: 20px;
   margin-bottom: 10px;
 `;

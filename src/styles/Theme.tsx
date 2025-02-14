@@ -25,8 +25,9 @@ export const Theme: DefaultTheme = {
   colors: {
     white: "#fff",
     gray: "#E0E0E0",
-    gray2: "#F0FAFF",
+    gray2: "#F7F7F7",
     black: "#000",
+    navy: "#00517d;",
     pointBlue: "#89D5FF",
     blue: "#B5E6FF",
     skyblue: "#D2F0FF",
