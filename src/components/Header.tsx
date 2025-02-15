@@ -16,7 +16,7 @@ const Header = () => {
         </MenuItem>
         <MenuItem to="/departure" $active={location.pathname === "/departure"}>
           추천출발시간
-          <ActiveLine $active={location.pathname === "/departure"} />
+          <ActiveLine $active={location.pathname.startsWith("/departure")} />
         </MenuItem>
         <MenuItem to="/news" $active={location.pathname === "/news"}>
           공항뉴스
@@ -35,6 +35,7 @@ const Container = styled.div`
   justify-content: space-between;
   padding: 0 40px;
   border-bottom: 1px solid ${(props) => props.theme.colors.gray};
+  /* background-color: rgba(255, 255, 255, 0.1); */
 `;
 
 const Logo = styled.div`
