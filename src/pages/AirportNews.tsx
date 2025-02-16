@@ -8,7 +8,7 @@ interface NewsArticle {
   pubDate: string;
 }
 const BASE_URL = import.meta.env.PROD
-  ? "https://big-fly.netlify.app/api"
+  ? "https://big-fly.netlify.app/.netlify/functions/NetlifyNews"
   : "v1/search/news.json";
 
 const AirportNews = () => {
