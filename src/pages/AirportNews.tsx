@@ -22,7 +22,7 @@ const AirportNews = () => {
         const response = await fetch(
           `${BASE_URL}/search/news.json?query=인천공항&display=${newsPerPage}&start=${start}&sort=${sortOption}`, // ✅ 정렬 방식 반영
           {
-            mode: "no-cors",
+            // mode: "no-cors",
             headers: {
               "Content-Type": "application/json",
               "X-Naver-Client-Id": import.meta.env
