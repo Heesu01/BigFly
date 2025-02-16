@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import {
   IoSearch,
@@ -36,13 +36,16 @@ const FlightSearch: React.FC<FlightSearchProps> = ({ onSearch }) => {
       <Row>
         <InputContainer>
           <IoCalendarOutline size={20} color="#888" />
-          <StyledDatePicker
-            selected={date}
-            onChange={(selectedDate: Date | null) => setDate(selectedDate)}
-            dateFormat="yyyy. MM. dd."
-            placeholderText="출국 날짜"
-            locale={ko}
-          />
+          <DatePickerWrapper>
+            <DatePicker
+              selected={date}
+              onChange={(selectedDate: Date | null) => setDate(selectedDate)}
+              dateFormat="yyyy. MM. dd."
+              placeholderText="출국 날짜"
+              locale={ko}
+              className="custom-datepicker"
+            />
+          </DatePickerWrapper>
         </InputContainer>
 
         <InputContainer>
@@ -113,12 +116,14 @@ const Input = styled.input`
   }
 `;
 
-const StyledDatePicker = styled(DatePicker)`
-  border: none;
-  font-size: 14px;
-  flex: 1;
+const DatePickerWrapper = styled.div`
+  .custom-datepicker {
+    border: none;
+    font-size: 14px;
+    flex: 1;
+  }
 
-  &:focus {
+  .custom-datepicker:focus {
     outline: none;
   }
 `;

@@ -1,4 +1,3 @@
-import React from "react";
 import FlightSearch from "../components/FlightSearch";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
