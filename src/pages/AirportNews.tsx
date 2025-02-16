@@ -7,6 +7,7 @@ interface NewsArticle {
   description: string;
   pubDate: string;
 }
+const BASE_URL = import.meta.env.PROD ? "https://openapi.naver.com" : "/v1";
 
 const AirportNews = () => {
   const [news, setNews] = useState<NewsArticle[]>([]);
@@ -19,8 +20,9 @@ const AirportNews = () => {
       try {
         const start = (page - 1) * newsPerPage + 1;
         const response = await fetch(
-          `/v1/search/news.json?query=인천공항&display=${newsPerPage}&start=${start}&sort=${sortOption}`, // ✅ 정렬 방식 반영
+          `${BASE_URL}/search/news.json?query=인천공항&display=${newsPerPage}&start=${start}&sort=${sortOption}`, // ✅ 정렬 방식 반영
           {
+            mode: "no-cors",
             headers: {
               "Content-Type": "application/json",
               "X-Naver-Client-Id": import.meta.env
