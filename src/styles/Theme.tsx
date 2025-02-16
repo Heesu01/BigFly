@@ -1,4 +1,5 @@
 import { DefaultTheme, css } from "styled-components";
+import "./font.css";
 
 export const Theme: DefaultTheme = {
   fonts: {
