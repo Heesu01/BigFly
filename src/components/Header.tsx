@@ -14,7 +14,7 @@ const Header = () => {
           <ActiveLine $active={location.pathname === "/realtime"} />
         </MenuItem>
         <MenuItem to="/departure" $active={location.pathname === "/departure"}>
-          추천출발시간
+          추천도착시간
           <ActiveLine $active={location.pathname.startsWith("/departure")} />
         </MenuItem>
         <MenuItem to="/news" $active={location.pathname === "/news"}>
@@ -53,8 +53,6 @@ interface MenuItemProps {
 }
 
 const MenuItem = styled(Link)<MenuItemProps>`
-  color: ${(props) =>
-    props.$active ? props.theme.colors.pointBlue : props.theme.colors.gray};
   font-weight: ${(props) => (props.$active ? "bold" : "normal")};
   text-decoration: none;
   cursor: pointer;

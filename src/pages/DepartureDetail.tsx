@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import flightBg from "../assets/flightBg.png";
@@ -31,6 +31,8 @@ const DepartureDetail = () => {
   >(null);
   const [arrivalTime, setArrivalTime] = useState<string>("");
   const [travelTimeStr, setTravelTimeStr] = useState<string>("");
+
+  const contentRef = useRef<HTMLDivElement>(null);
 
   console.log("searchData:", searchData);
 
@@ -107,6 +109,21 @@ const DepartureDetail = () => {
     }
   }, [searchData]);
 
+  useEffect(() => {
+    if (contentRef.current) {
+      contentRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: "smooth",
+      });
+    }, 1000);
+  }, []);
+
   if (!searchData) {
     return <Container>검색된 데이터가 없습니다.</Container>;
   }
@@ -134,7 +151,7 @@ const DepartureDetail = () => {
         <FaChevronDown />
       </Arrow>
 
-      <ContentWrapper>
+      <ContentWrapper ref={contentRef}>
         <InfoSection>
           <TerminalCongestion />
         </InfoSection>

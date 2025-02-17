@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
+import "./font.css";
 
 const GlobalStyle = createGlobalStyle`
   ${reset};
@@ -9,6 +10,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     border: 0;
+    font-family: "Pretendard";
     text-decoration: none;
     box-sizing: border-box;
     color: #0C0C0C;
@@ -18,7 +20,7 @@ const GlobalStyle = createGlobalStyle`
     }
   }
   body {
-    line-height: 1;
+    line-height: 1.2;
     margin: 0;
     padding: 0;
   }
