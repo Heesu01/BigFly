@@ -13,9 +13,12 @@ import { useNavigate } from "react-router-dom";
 
 interface FlightSearchProps {
   onSearch: (data: {
-    date: Date | null;
-    flightNumber: string;
-    departureTime: string;
+    year: number;
+    month: number;
+    day: number;
+    airline: string;
+    flight_number: string;
+    departure_time: string;
   }) => void;
 }
 
@@ -26,9 +29,28 @@ const FlightSearch: React.FC<FlightSearchProps> = ({ onSearch }) => {
   const [departureTime, setDepartureTime] = useState<string>("");
 
   const handleSearch = () => {
-    onSearch({ date, flightNumber, departureTime });
-    const searchData = { date, flightNumber, departureTime };
-    navigate("/departure/detail", { state: searchData });
+    if (!date || !flightNumber || !departureTime) {
+      alert("모든 필드를 입력해주세요!");
+      return;
+    }
+
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const airline = flightNumber.slice(0, 2);
+    const flightNum = flightNumber.slice(2);
+
+    const formattedData = {
+      year,
+      month,
+      day,
+      airline,
+      flight_number: flightNum,
+      departure_time: departureTime,
+    };
+
+    onSearch(formattedData);
+    navigate("/departure/detail", { state: formattedData });
   };
 
   return (
@@ -51,10 +73,10 @@ const FlightSearch: React.FC<FlightSearchProps> = ({ onSearch }) => {
         <InputContainer>
           <IoTimeOutline size={20} color="#888" />
           <Input
-            type="text"
+            type="time"
             value={departureTime}
             onChange={(e) => setDepartureTime(e.target.value)}
-            placeholder="오후 12:12"
+            placeholder="12:12"
           />
         </InputContainer>
 
@@ -63,7 +85,7 @@ const FlightSearch: React.FC<FlightSearchProps> = ({ onSearch }) => {
           <Input
             type="text"
             value={flightNumber}
-            onChange={(e) => setFlightNumber(e.target.value)}
+            onChange={(e) => setFlightNumber(e.target.value.toUpperCase())}
             placeholder="TW281"
           />
         </InputContainer>
@@ -109,7 +131,6 @@ const Input = styled.input`
   border: none;
   font-size: 14px;
   flex: 1;
-  margin-right: 30px;
 
   &:focus {
     outline: none;

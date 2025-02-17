@@ -7,12 +7,14 @@ const MainPage = () => {
   const navigate = useNavigate();
 
   const handleSearch = (data: {
-    date: Date | null;
-    flightNumber: string;
-    departureTime: string;
+    year: number;
+    month: number;
+    day: number;
+    airline: string;
+    flight_number: string;
+    departure_time: string;
   }) => {
     console.log("검색 데이터:", data);
-    //api요청
   };
 
   return (
