@@ -2,11 +2,14 @@ import FlightSearch from "../components/FlightSearch";
 import styled from "styled-components";
 import flightBg from "../assets/flightBg.png";
 
-const DepartureRecommendation: React.FC = () => {
+const DepartureRecommendation = () => {
   const handleSearch = (data: {
-    date: Date | null;
-    flightNumber: string;
-    departureTime: string;
+    year: number;
+    month: number;
+    day: number;
+    airline: string;
+    flight_number: string;
+    departure_time: string;
   }) => {
     console.log("검색 데이터:", data);
   };
@@ -18,7 +21,7 @@ const DepartureRecommendation: React.FC = () => {
         <Title>
           여유로운 공항 출발을 위한
           <br /> 최고의 시간은?
-          <p>실시간 데이터로 최적의 도착 시간을 추천해드립니다!</p>
+          <p>실시간 데이터로 최적의 도착시간을 추천해드립니다!</p>
         </Title>
         <FlightSearch onSearch={handleSearch} />
       </ContentWrapper>
