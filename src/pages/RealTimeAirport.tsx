@@ -10,6 +10,7 @@ import {
 } from "recharts";
 import Axios from "../api/Axios";
 import ParkingSection from "../components/ParkingSection";
+import WeatherSection from "../components/WeatherSection";
 
 interface ForecastItem {
   time_range: string;
@@ -97,7 +98,7 @@ const RealTimeAirport = () => {
         <Title>실시간 공항정보</Title>
         <Grid>
           <Box>
-            <Subtitle>{today} 시간대별 출국자 예측</Subtitle>
+            <Subtitle>{today} 시간대별 출국자 수 예측</Subtitle>
             <ResponsiveContainer width="100%" height={150}>
               <LineChart data={forecastData}>
                 <XAxis
@@ -116,11 +117,11 @@ const RealTimeAirport = () => {
             </ResponsiveContainer>
           </Box>
           <Box>
-            <Subtitle>지연 가능성</Subtitle>
+            <Subtitle>공항별</Subtitle>
             <PlaceholderText>데이터 없음</PlaceholderText>
           </Box>
           <Box>
-            <Subtitle>출국장별</Subtitle>
+            <Subtitle>현재 출국장 혼잡도</Subtitle>
             {currentForecast ? (
               <ForecastDetail>
                 <TerminalContainer>
@@ -311,8 +312,8 @@ const RealTimeAirport = () => {
             )}
           </Box>
           <Box>
-            <Subtitle>항공사별</Subtitle>
-            <PlaceholderText>데이터 없음</PlaceholderText>
+            <Subtitle>날씨</Subtitle>
+            <WeatherSection />
           </Box>
           <FullWidthBox>
             <Subtitle>주차장 정보</Subtitle>
