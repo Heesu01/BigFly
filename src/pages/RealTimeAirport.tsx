@@ -11,6 +11,7 @@ import {
 import Axios from "../api/Axios";
 import ParkingSection from "../components/ParkingSection";
 import WeatherSection from "../components/WeatherSection";
+import OtherStatus from "../components/OtherStatus";
 
 interface ForecastItem {
   time_range: string;
@@ -96,7 +97,7 @@ const RealTimeAirport = () => {
     <Container>
       <Content>
         <Title>실시간 공항정보</Title>
-        <Grid>
+        <TopGrid>
           <Box>
             <Subtitle>{today} 시간대별 출국자 수 예측</Subtitle>
             <ResponsiveContainer width="100%" height={150}>
@@ -117,8 +118,14 @@ const RealTimeAirport = () => {
             </ResponsiveContainer>
           </Box>
           <Box>
-            <Subtitle>공항별</Subtitle>
-            <PlaceholderText>데이터 없음</PlaceholderText>
+            <Subtitle>타 공항 실시간 현황</Subtitle>
+            <OtherStatus />
+          </Box>
+        </TopGrid>
+        <BottomGrid>
+          <Box>
+            <Subtitle>날씨</Subtitle>
+            <WeatherSection />
           </Box>
           <Box>
             <Subtitle>현재 출국장 혼잡도</Subtitle>
@@ -311,15 +318,12 @@ const RealTimeAirport = () => {
               <PlaceholderText>데이터 없음</PlaceholderText>
             )}
           </Box>
-          <Box>
-            <Subtitle>날씨</Subtitle>
-            <WeatherSection />
-          </Box>
+
           <FullWidthBox>
             <Subtitle>주차장 정보</Subtitle>
             <ParkingSection />
           </FullWidthBox>
-        </Grid>
+        </BottomGrid>
       </Content>
     </Container>
   );
@@ -345,9 +349,15 @@ const Title = styled.h1`
   margin-bottom: 16px;
 `;
 
-const Grid = styled.div`
+const TopGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 2.5fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+`;
+const BottomGrid = styled.div`
+  display: grid;
+  grid-template-columns: 2fr 3fr;
   gap: 16px;
 `;
 
