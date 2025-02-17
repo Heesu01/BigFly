@@ -9,6 +9,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import Axios from "../api/Axios";
+import ParkingSection from "../components/ParkingSection";
 
 interface ForecastItem {
   time_range: string;
@@ -315,6 +316,7 @@ const RealTimeAirport = () => {
           </Box>
           <FullWidthBox>
             <Subtitle>주차장 정보</Subtitle>
+            <ParkingSection />
           </FullWidthBox>
         </Grid>
       </Content>
