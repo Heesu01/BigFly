@@ -190,14 +190,19 @@ const DepartureDetail = () => {
             {arrivalTime ? `🕘 ${arrivalTime}` : "분석중.."}
           </TimeDisplay>
           <TimeText>
-            공항에서의 소요시간은 {travelTimeStr ? travelTimeStr : "분석중.."}
-            으로 예측되었습니다.
-            <br />
-            최소{" "}
-            {arrivalTime
-              ? `${arrivalTime.split(":")[0]}시 ${arrivalTime.split(":")[1]}분`
-              : "분석중..."}
-            까지 도착하세요!
+            {arrivalTime && travelTimeStr ? (
+              <>
+                공항에서의 소요시간은 {travelTimeStr}으로 예측되었습니다.
+                <br />
+                최소{" "}
+                {`${arrivalTime.split(":")[0]}시 ${
+                  arrivalTime.split(":")[1]
+                }분`}{" "}
+                까지 도착하세요!
+              </>
+            ) : (
+              "분석중..."
+            )}
           </TimeText>
           <TipBox>
             <p>✈️ 공항은 혼잡할 수 있으니, 여유롭게 도착하세요!</p>

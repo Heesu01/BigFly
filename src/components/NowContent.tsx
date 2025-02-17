@@ -72,7 +72,7 @@ const DepartureStatus = () => {
 
   return (
     <Container>
-      <Title>출국장 혼잡도</Title>
+      <Title>출국장 혼잡도 예측</Title>
       <InfoButton onClick={() => setShowLegend((prev) => !prev)}>
         <MdInfoOutline />
       </InfoButton>
@@ -89,17 +89,11 @@ const DepartureStatus = () => {
           </LegendItem>
           <LegendItem color="#ffcc80">
             <LegendLabel>ORANGE</LegendLabel>
-            <LegendText>
-              시간당 8,200 ~ 8,600명 <br />
-              연속 2시간 7,600명 초과
-            </LegendText>
+            <LegendText>시간당 8,200 ~ 8,600명</LegendText>
           </LegendItem>
           <LegendItem color="#ffcccc">
             <LegendLabel>RED</LegendLabel>
-            <LegendText>
-              시간당 8,600명 이상 <br />
-              연속 2시간 8,200명 초과
-            </LegendText>
+            <LegendText>시간당 8,600명 이상</LegendText>
           </LegendItem>
         </LegendPopover>
       )}
